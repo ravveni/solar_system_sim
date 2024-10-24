@@ -1,5 +1,6 @@
 // celestial_body.c
 #include "celestial_body.h"
+#include "stdio.h"
 
 #define GRAVITATIONAL_CONSTANT 0.0001f
 
@@ -28,8 +29,8 @@ Vector2 Vector2MultiplyValue(Vector2 vector, float value) {
     return Vector2Multiply(vector, vectored_value);
 }
 
-void update_velocity(CelestialBody all_bodies[], CelestialBody *current_body) {
-    for (int i = 0; i < 3; i++) {
+void update_velocity(CelestialBody all_bodies[], CelestialBody *current_body, int total) {
+    for (int i = 0; i < total; i++) {
         if (all_bodies[i].id != current_body->id) {
             float sqr_dst = Vector2DistanceSqr(all_bodies[i].position, current_body->position);
             Vector2 force_dir = Vector2Normalize(Vector2Subtract(all_bodies[i].position, current_body->position));
