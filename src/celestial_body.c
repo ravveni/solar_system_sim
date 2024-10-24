@@ -5,7 +5,7 @@
 #define GRAVITATIONAL_CONSTANT 0.0001f
 
 CelestialBody* CreateCelestialBody(int id, float radius, Color color, float surfaceGravity, Vector2 initialPosition, Vector2 initialVelocity) {
-    CelestialBody *celestialBody = (CelestialBody*) malloc(sizeof(CelestialBody));
+    CelestialBody *celestialBody = malloc(sizeof(CelestialBody));
 
     if (!celestialBody) {
         printf("Memory allocation failed.\n");
@@ -32,18 +32,8 @@ void DrawCelestialBody(CelestialBody *celestialBody) {
 }
 
 void DrawPositionHistory(CelestialBody *celestialBody) {
-    for (int i = MAX_POSITIONS; i >= 0; --i) {
-        if (celestialBody->id == 0) {
-            Vector2 nextPosition = celestialBody->historicPositions[celestialBody->historicPositionIndex + 1];
-            if (celestialBody->historicPositionIndex - 1 < 0) {
-                nextPosition = celestialBody->historicPositions[99];
-            }
-
-            DrawLineV(celestialBody->historicPositions[i], nextPosition, celestialBody->color);
-        }
-        else {
-            DrawCircleV(celestialBody->historicPositions[i], 5.0f, celestialBody->color);
-        }
+    for (int i = 0; i < MAX_POSITIONS; i++) {
+        DrawCircleV(celestialBody->historicPositions[i], 5.0f, celestialBody->color);
     }
 }
 

@@ -29,13 +29,13 @@ typedef enum {
 CelestialBody* allBodies[COUNT];
 
 void init() {
-    allBodies[SUN] = CreateCelestialBody(SUN, SUN_RADIUS, SUN_COLOR, 20, SCREEN_CENTER, (Vector2){0, 0});
+    allBodies[SUN] = CreateCelestialBody(SUN, SUN_RADIUS, SUN_COLOR, 20, Vector2Zero(), (Vector2){2, 2});
     Vector2 initialInfernoPosition = {allBodies[SUN]->position.x + 500.0f, allBodies[SUN]->position.y};
-    allBodies[INFERNO] = CreateCelestialBody(INFERNO, INFERNO_RADIUS, INFERNO_COLOR, 2, initialInfernoPosition, (Vector2){0, 25});
+    allBodies[INFERNO] = CreateCelestialBody(INFERNO, INFERNO_RADIUS, INFERNO_COLOR, 2, initialInfernoPosition, (Vector2){2, 27});
     Vector2 initialBluedotPosition = {allBodies[SUN]->position.x + 3000.0f, allBodies[SUN]->position.y};
-    allBodies[BLUEDOT] = CreateCelestialBody(BLUEDOT, BLUEDOT_RADIUS, BLUEDOT_COLOR, 10, initialBluedotPosition, (Vector2){0, 9});
+    allBodies[BLUEDOT] = CreateCelestialBody(BLUEDOT, BLUEDOT_RADIUS, BLUEDOT_COLOR, 10, initialBluedotPosition, (Vector2){2, 11});
     Vector2 initialMoonPosition = {allBodies[BLUEDOT]->position.x + 125.0f, allBodies[BLUEDOT]->position.y};
-    allBodies[MOON] = CreateCelestialBody(MOON, MOON_RADIUS, MOON_COLOR, 1, initialMoonPosition, (Vector2){0, 1});
+    allBodies[MOON] = CreateCelestialBody(MOON, MOON_RADIUS, MOON_COLOR, 1, initialMoonPosition, (Vector2){2, 3});
 }
 
 int main() {
