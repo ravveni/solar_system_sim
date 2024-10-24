@@ -3,7 +3,10 @@
 #ifndef CELESTIAL_BODY_H
 #define CELESTIAL_BODY_H
 
-#include "common.h"
+#include "raylib.h"
+#include "raymath.h"
+#include "stdio.h"
+#include "stdlib.h"
 
 #define MAX_POSITIONS 100
 
@@ -19,8 +22,13 @@ typedef struct {
 } CelestialBody;
 
 CelestialBody* CreateCelestialBody(int id, float radius, Color color, float surfaceGravity, Vector2 initialPosition, Vector2 initialVelocity);
+
+void DestroyCelestialBody(CelestialBody *celestialBody);
+
 void DrawCelestialBody(CelestialBody *celestialBody);
-void DrawPositionHistory(CelestialBody *celestialBody);
-void UpdateCelestialBody(CelestialBody *allBodies[], CelestialBody *currentBody, int total);
+
+void DrawHistoricPositions(CelestialBody *celestialBody);
+
+void UpdateCelestialBody(CelestialBody *solarSystem[], int celestialBodiesCount, int currentIndex);
 
 #endif

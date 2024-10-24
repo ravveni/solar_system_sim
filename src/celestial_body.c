@@ -3,6 +3,7 @@
 #include "celestial_body.h"
 
 #define GRAVITATIONAL_CONSTANT 0.0001f
+#define HISTORIC_POSITION_RADIUS 5.0f
 
 CelestialBody* CreateCelestialBody(int id, float radius, Color color, float surfaceGravity, Vector2 initialPosition, Vector2 initialVelocity) {
     CelestialBody *celestialBody = malloc(sizeof(CelestialBody));
@@ -27,13 +28,17 @@ CelestialBody* CreateCelestialBody(int id, float radius, Color color, float surf
     return celestialBody;
 }
 
+void DestroyCelestialBody(CelestialBody *celestialBody) {
+    free(celestialBody);
+}
+
 void DrawCelestialBody(CelestialBody *celestialBody) {
     DrawCircle(celestialBody->position.x, celestialBody->position.y, celestialBody->radius, celestialBody->color);
 }
 
-void DrawPositionHistory(CelestialBody *celestialBody) {
+void DrawHistoricPositions(CelestialBody *celestialBody) {
     for (int i = 0; i < MAX_POSITIONS; i++) {
-        DrawCircleV(celestialBody->historicPositions[i], 5.0f, celestialBody->color);
+        DrawCircleV(celestialBody->historicPositions[i], HISTORIC_POSITION_RADIUS, celestialBody->color);
     }
 }
 
@@ -47,35 +52,18 @@ Vector2 Vector2MultiplyValue(Vector2 vector, float value) {
     return Vector2Multiply(vector, vectoredValue);
 }
 
-void UpdateCelestialBody(CelestialBody *allBodies[], CelestialBody *currentBody, int total) {
-    for (int i = 0; i < total; i++) {
-        if (allBodies[i]->id != currentBody->id) {
-            float dstSqr = Vector2DistanceSqr(
-                allBodies[i]->position,
-                currentBody->position
-            );
-            Vector2 forceDir = Vector2Normalize(
-                Vector2Subtract(
-                    allBodies[i]->position,
-                    currentBody->position
-                )
-            );
-            Vector2 acceleration = Vector2DivideValue(
-                Vector2MultiplyValue(
-                    Vector2MultiplyValue(
-                        forceDir,
-                        GRAVITATIONAL_CONSTANT
-                    ),
-                    allBodies[i]->mass
-                ),
-                dstSqr
-            );
+void UpdateCelestialBody(CelestialBody *solarSystem[], int celestialBodiesCount, int currentIndex) {
+    for (int i = 0; i < celestialBodiesCount; i++) {
+        if (solarSystem[i]->id != solarSystem[currentIndex]->id) {
+            float dstSqr = Vector2DistanceSqr(solarSystem[i]->position, solarSystem[currentIndex]->position );
+            Vector2 forceDir = Vector2Normalize(Vector2Subtract(solarSystem[i]->position, solarSystem[currentIndex]->position));
+            Vector2 acceleration = Vector2DivideValue(Vector2MultiplyValue(Vector2MultiplyValue(forceDir, GRAVITATIONAL_CONSTANT), solarSystem[i]->mass), dstSqr);
 
-            currentBody->velocity = Vector2Add(currentBody->velocity, acceleration);
-            currentBody->position = Vector2Add(currentBody->velocity, currentBody->position);
+            solarSystem[currentIndex]->velocity = Vector2Add(solarSystem[currentIndex]->velocity, acceleration);
+            solarSystem[currentIndex]->position = Vector2Add(solarSystem[currentIndex]->velocity, solarSystem[currentIndex]->position);
 
-            currentBody->historicPositions[currentBody->historicPositionIndex] = currentBody->position;
-            currentBody->historicPositionIndex = (currentBody->historicPositionIndex + 1) % 100;
+            solarSystem[currentIndex]->historicPositions[solarSystem[currentIndex]->historicPositionIndex] = solarSystem[currentIndex]->position;
+            solarSystem[currentIndex]->historicPositionIndex = (solarSystem[currentIndex]->historicPositionIndex + 1) % MAX_POSITIONS;
         }
     }
 }

@@ -8,7 +8,7 @@ BIN_DIR = bin
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, $(SRC_FILES))
 
-EXECUTABLE = simulation
+EXECUTABLE = solar-system-sim
 
 $(EXECUTABLE): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
