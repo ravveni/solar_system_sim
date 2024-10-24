@@ -15,13 +15,6 @@ typedef struct {
     Vector2 velocity;
 } CelestialBody;
 
-typedef enum {
-    SUN,
-    PLANET,
-    MOON,
-    ENTITY_COUNT
-} Entities;
-
 CelestialBody create_celestial_body(int id, float radius, Color color, float surface_gravity, Vector2 initial_position, Vector2 initial_velocity);
 void draw_celestial_body(CelestialBody *celestial_body);
 void update_velocity(CelestialBody allBodies[], CelestialBody *currentBody);
