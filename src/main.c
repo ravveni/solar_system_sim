@@ -9,15 +9,19 @@
 #define SUN_COLOR ORANGE
 #define SUN_RADIUS 200.0f
 
-#define PLANET_COLOR DARKBLUE
-#define PLANET_RADIUS 50.0f
+#define INFERNO_COLOR MAROON
+#define INFERNO_RADIUS 7.5f
+
+#define BLUEDOT_COLOR DARKBLUE
+#define BLUEDOT_RADIUS 50.0f
 
 #define MOON_COLOR LIGHTGRAY
 #define MOON_RADIUS 5.0f
 
 typedef enum {
     SUN,
-    PLANET,
+    INFERNO,
+    BLUEDOT,
     MOON,
     COUNT
 } CelestialBodies;
@@ -25,11 +29,13 @@ typedef enum {
 CelestialBody allBodies[COUNT];
 
 void init() {
-    allBodies[SUN] = CreateCelestialBody(SUN, SUN_RADIUS, SUN_COLOR, 10, SCREEN_CENTER, (Vector2){0, 0});
-    Vector2 initialPlanetPosition = {allBodies[SUN].position.x + 2000.0f, allBodies[SUN].position.y};
-    allBodies[PLANET] = CreateCelestialBody(PLANET, PLANET_RADIUS, PLANET_COLOR, 4, initialPlanetPosition, (Vector2){0, 10});
-    Vector2 initialMoonPosition = {allBodies[PLANET].position.x + 150.0f, allBodies[PLANET].position.y};
-    allBodies[MOON] = CreateCelestialBody(MOON, MOON_RADIUS, MOON_COLOR, 2, initialMoonPosition, (Vector2){0, 4});
+    allBodies[SUN] = CreateCelestialBody(SUN, SUN_RADIUS, SUN_COLOR, 20, SCREEN_CENTER, (Vector2){0, 0});
+    Vector2 initialInfernoPosition = {allBodies[SUN].position.x + 500.0f, allBodies[SUN].position.y};
+    allBodies[INFERNO] = CreateCelestialBody(INFERNO, INFERNO_RADIUS, INFERNO_COLOR, 2, initialInfernoPosition, (Vector2){0, 25});
+    Vector2 initialBluedotPosition = {allBodies[SUN].position.x + 3000.0f, allBodies[SUN].position.y};
+    allBodies[BLUEDOT] = CreateCelestialBody(BLUEDOT, BLUEDOT_RADIUS, BLUEDOT_COLOR, 10, initialBluedotPosition, (Vector2){0, 9.4});
+    Vector2 initialMoonPosition = {allBodies[BLUEDOT].position.x + 125.0f, allBodies[BLUEDOT].position.y};
+    allBodies[MOON] = CreateCelestialBody(MOON, MOON_RADIUS, MOON_COLOR, 1, initialMoonPosition, (Vector2){0, 1});
 }
 
 int main() {
@@ -39,7 +45,7 @@ int main() {
     init();
 
     Camera2D camera = {0};
-    camera.zoom = 0.20f;
+    camera.zoom = 0.15f;
     camera.offset = SCREEN_CENTER;
 
     while (!WindowShouldClose()) {
