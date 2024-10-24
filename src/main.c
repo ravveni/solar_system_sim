@@ -20,16 +20,16 @@ typedef enum {
     PLANET,
     MOON,
     COUNT
-} Bodies;
+} CelestialBodies;
 
-CelestialBody all_bodies[COUNT];
+CelestialBody allBodies[COUNT];
 
 void init() {
-    all_bodies[SUN] = create_celestial_body(SUN, SUN_RADIUS, SUN_COLOR, 10, SCREEN_CENTER, (Vector2){0, 0});
-    Vector2 initial_planet_position = {all_bodies[SUN].position.x + 2000.0f, all_bodies[SUN].position.y};
-    all_bodies[PLANET] = create_celestial_body(PLANET, PLANET_RADIUS, PLANET_COLOR, 4, initial_planet_position, (Vector2){0, 10});
-    Vector2 initial_moon_position = {all_bodies[PLANET].position.x + 150.0f, all_bodies[PLANET].position.y};
-    all_bodies[MOON] = create_celestial_body(MOON, MOON_RADIUS, MOON_COLOR, 2, initial_moon_position, (Vector2){0, 4});
+    allBodies[SUN] = CreateCelestialBody(SUN, SUN_RADIUS, SUN_COLOR, 10, SCREEN_CENTER, (Vector2){0, 0});
+    Vector2 initialPlanetPosition = {allBodies[SUN].position.x + 2000.0f, allBodies[SUN].position.y};
+    allBodies[PLANET] = CreateCelestialBody(PLANET, PLANET_RADIUS, PLANET_COLOR, 4, initialPlanetPosition, (Vector2){0, 10});
+    Vector2 initialMoonPosition = {allBodies[PLANET].position.x + 150.0f, allBodies[PLANET].position.y};
+    allBodies[MOON] = CreateCelestialBody(MOON, MOON_RADIUS, MOON_COLOR, 2, initialMoonPosition, (Vector2){0, 4});
 }
 
 int main() {
@@ -47,10 +47,10 @@ int main() {
         BeginMode2D(camera);
         ClearBackground(NEARBLACK);
         for (int i = 0; i < COUNT; i++) {
-            update_velocity(all_bodies, &all_bodies[i], COUNT);
-            camera.target = all_bodies[SUN].position;
+            UpdateVelocity(allBodies, &allBodies[i], COUNT);
+            camera.target = allBodies[SUN].position;
 
-            draw_celestial_body(&all_bodies[i]);
+            DrawCelestialBody(&allBodies[i]);
         }
         EndMode2D();
         EndDrawing();
