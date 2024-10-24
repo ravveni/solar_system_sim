@@ -1,3 +1,5 @@
+// main.c
+
 #include "celestial_body.h"
 
 #define SCREEN_WIDTH 1200
@@ -30,11 +32,11 @@ CelestialBody allBodies[COUNT];
 
 void init() {
     allBodies[SUN] = CreateCelestialBody(SUN, SUN_RADIUS, SUN_COLOR, 20, SCREEN_CENTER, (Vector2){0, 0});
-    Vector2 initialInfernoPosition = {allBodies[SUN].position.x + 500.0f, allBodies[SUN].position.y};
+    Vector2 initialInfernoPosition = {allBodies[SUN].positionHistory[allBodies[SUN].currentPositionIndex].x + 500.0f, allBodies[SUN].positionHistory[allBodies[SUN].currentPositionIndex].y};
     allBodies[INFERNO] = CreateCelestialBody(INFERNO, INFERNO_RADIUS, INFERNO_COLOR, 2, initialInfernoPosition, (Vector2){0, 25});
-    Vector2 initialBluedotPosition = {allBodies[SUN].position.x + 3000.0f, allBodies[SUN].position.y};
+    Vector2 initialBluedotPosition = {allBodies[SUN].positionHistory[allBodies[SUN].currentPositionIndex].x + 3000.0f, allBodies[SUN].positionHistory[allBodies[SUN].currentPositionIndex].y};
     allBodies[BLUEDOT] = CreateCelestialBody(BLUEDOT, BLUEDOT_RADIUS, BLUEDOT_COLOR, 10, initialBluedotPosition, (Vector2){0, 9});
-    Vector2 initialMoonPosition = {allBodies[BLUEDOT].position.x + 125.0f, allBodies[BLUEDOT].position.y};
+    Vector2 initialMoonPosition = {allBodies[BLUEDOT].positionHistory[allBodies[BLUEDOT].currentPositionIndex].x + 125.0f, allBodies[BLUEDOT].positionHistory[allBodies[BLUEDOT].currentPositionIndex].y};
     allBodies[MOON] = CreateCelestialBody(MOON, MOON_RADIUS, MOON_COLOR, 1, initialMoonPosition, (Vector2){0, 1});
 }
 
@@ -53,8 +55,8 @@ int main() {
         BeginMode2D(camera);
         ClearBackground(NEARBLACK);
         for (int i = 0; i < COUNT; i++) {
-            UpdateVelocity(allBodies, &allBodies[i], COUNT);
-            camera.target = allBodies[SUN].position;
+            UpdateCelestialBody(allBodies, &allBodies[i], COUNT);
+            camera.target = allBodies[SUN].positionHistory[allBodies[SUN].currentPositionIndex];
 
             DrawCelestialBody(&allBodies[i]);
         }
