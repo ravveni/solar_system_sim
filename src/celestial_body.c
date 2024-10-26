@@ -33,7 +33,7 @@ void DestroyCelestialBody(CelestialBody *celestialBody) {
 }
 
 void DrawCelestialBody(CelestialBody *celestialBody) {
-    DrawCircle(celestialBody->position.x, celestialBody->position.y, celestialBody->radius, celestialBody->color);
+    DrawCircleV(celestialBody->position, celestialBody->radius, celestialBody->color);
 }
 
 void DrawHistoricPositions(CelestialBody *celestialBody) {
