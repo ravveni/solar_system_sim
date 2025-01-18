@@ -1,6 +1,6 @@
 CC = gcc
-CFLAGS = -std=c17 -I./raylib/include -Wall
-LDFLAGS = -L./raylib/lib -lraylib
+CFLAGS = -std=c99 -I./include -Wall
+LDFLAGS = -L./lib -lraylib -rpath ./lib
 
 SRC_DIR = src
 BIN_DIR = bin
@@ -8,7 +8,7 @@ BIN_DIR = bin
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(SRC_DIR)/%.o, $(SRC_FILES))
 
-EXECUTABLE = solar-system-sim
+EXECUTABLE = raytest
 
 $(EXECUTABLE): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
