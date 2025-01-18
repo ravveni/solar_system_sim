@@ -1,4 +1,4 @@
-#include "celestial_body.h"
+#include "celestial_body.hpp"
 
 #define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 900
@@ -38,7 +38,7 @@ typedef enum {
     CELESTIAL_BODIES_COUNT
 } CelestialBodyID;
 
-Camera2D camera = {0};
+Camera2D camera = {};
 CelestialBody* solarSystem[CELESTIAL_BODIES_COUNT];
 
 void CreateSolarSystem() {
