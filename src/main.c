@@ -1,4 +1,4 @@
-#include "celestial_body.hpp"
+#include "celestial_body.h"
 
 #define SCREEN_WIDTH 1200
 #define SCREEN_HEIGHT 900
@@ -31,14 +31,14 @@
 #define MOON_SURFACE_GRAVITY 1
 
 typedef enum {
-    SUN,
-    INFERNO,
-    BLUEDOT,
     MOON,
+    BLUEDOT,
+    INFERNO,
+    SUN,
     CELESTIAL_BODIES_COUNT
 } CelestialBodyID;
 
-Camera2D camera = {};
+Camera2D camera = {0};
 CelestialBody* solarSystem[CELESTIAL_BODIES_COUNT];
 
 void CreateSolarSystem() {

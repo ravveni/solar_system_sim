@@ -8,7 +8,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-#define MAX_POSITIONS 100
+#define MAX_POSITIONS 200
 
 typedef struct {
     int id;

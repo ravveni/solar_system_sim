@@ -1,5 +1,4 @@
 .clangd
 .DS_Store
-.vscode
 src/*.o
 solar-system-sim

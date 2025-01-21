@@ -1,12 +1,12 @@
 // celestial_body.c
 
-#include "celestial_body.hpp"
+#include "celestial_body.h"
 
 #define GRAVITATIONAL_CONSTANT 0.0001f
 #define HISTORIC_POSITION_RADIUS 5.0f
 
 CelestialBody* CreateCelestialBody(int id, float radius, Color color, float surfaceGravity, Vector2 initialPosition, Vector2 initialVelocity) {
-    CelestialBody *celestialBody = static_cast<CelestialBody*>(malloc(sizeof(CelestialBody)));
+    CelestialBody *celestialBody = malloc(sizeof(CelestialBody));
 
     if (!celestialBody) {
         printf("Memory allocation failed.\n");
