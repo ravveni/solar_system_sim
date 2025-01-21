@@ -31,10 +31,10 @@
 #define MOON_SURFACE_GRAVITY 1
 
 typedef enum {
-    MOON,
-    BLUEDOT,
     INFERNO,
     SUN,
+    BLUEDOT,
+    MOON,
     CELESTIAL_BODIES_COUNT
 } CelestialBodyID;
 
