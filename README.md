@@ -7,3 +7,5 @@
 
 A Physics-Based Solar System Simulation
 ```
+
+###### Powered by Raylib 5.5
